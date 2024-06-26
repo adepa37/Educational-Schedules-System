@@ -13,39 +13,23 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <!-- <img src="{{ url('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"> -->
+
                     <span class="hidden-xs">{{ Auth::user()->name}}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                        <!-- <img src="{{ url('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image"> -->
+
 
                         <p>
                             {{ Auth::user()->name}}
-                            <!-- <small>Member since Nov. 2012</small> -->
+
                         </p>
                     </li>
-                    <!-- Menu Body -->
-                    <li class="user-body">
-                        <!-- <div class="row">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
-                        </div> -->
-                        <!-- /.row -->
-                    </li>
+
                     <!-- Menu Footer-->
                     <li class="user-footer">
-                        <!-- <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
-                        </div> -->
+
                         <div class="pull-right">
                             <a href="{{ url('logout')}}" class="btn btn-default btn-flat">Sign out</a>
                         </div>
@@ -90,21 +74,70 @@
             </li>
             <li class="{{ 'admin/admin/list' == request()->path() ? 'active' : ''}} ">
                 <a href="{{ url('admin/admin/list')}}">
-                    <i class="fa fa-user"></i> <span>Admin</span>
+                    <i class="fa fa-user"></i> <span>Users</span>
                 </a>
             </li>
+
+            <li class="{{ 'admin/group/list' == request()->path() ? 'active' : ''}} ">
+                <a href="{{ url('admin/group/list')}}">
+                    <i class="ion ion-person-stalker"></i> <span>Groups</span>
+                </a>
+            </li>
+
+            <li class="{{ 'admin/course/list' == request()->path() ? 'active' : ''}} ">
+                <a href="{{ url('admin/course/list')}}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Course</span>
+                </a>
+            </li>
+
+            <li class="{{ 'admin/room/list' == request()->path() ? 'active' : ''}} ">
+                <a href="{{ url('admin/room/list')}}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Room</span>
+                </a>
+            </li>
+
+            <li class=" {{ 'admin/schedule/list' == request()->path() ? 'active' : ''}}">
+                <a href="{{ url('admin/schedule/list')}}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Schedules</span>
+                </a>
+            </li>
+            <li class=" {{ 'admin/timeTable/list' == request()->path() ? 'active' : ''}}">
+                <a href="{{ url('admin/timeTable/list')}}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Time Table</span>
+                </a>
+            </li>
+
             @elseif(Auth::user()->usertype == 2)
             <li class="{{ 'teacher/dashboard' == request()->path() ? 'active' : ''}} ">
                 <a href="{{ url('teacher/dashboard')}}">
-                    <i class="fa fa-home"></i> <span>Dashboard</span>
+                    <i class="fa fa-home"></i> <span>User Profile</span>
 
                 </a>
             </li>
+
+            <li class="{{ 'teacher/timeTable/list' == request()->path() ? 'active' : ''}} ">
+                <a href="{{ url('teacher/timeTable/list')}} ">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Schedules</span>
+                </a>
+            </li>
+
             @elseif(Auth::user()->usertype == 3)
             <li class="{{ 'student/dashboard' == request()->path() ? 'active' : ''}} ">
                 <a href="{{ url('student/dashboard')}}">
-                    <i class="fa fa-home"></i> <span>Dashboard</span>
+                    <i class="fa fa-home"></i> <span>User Profile</span>
 
+                </a>
+            </li>
+
+            <li class=" {{ 'student/timeTable/list' == request()->path() ? 'active' : ''}}">
+                <a href="{{ url('student/timeTable/list')}}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Schedules</span>
                 </a>
             </li>
             @endif
@@ -112,7 +145,7 @@
 
             <li class="{{ 'logout' == request()->path() ? 'active' : ''}} ">
                 <a href="{{ url('logout')}}">
-                    <i class="fa fa-logout"></i> <span>Logout</span>
+                    <i class="ion ion-log-out"></i> <span>Logout</span>
                 </a>
             </li>
         </ul>

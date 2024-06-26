@@ -9,12 +9,12 @@
 
         <div class="col-sm-6">
             <h1>
-                User List (Total : {{$getRecord->total()}})
+                Schedule List (Total : {{$getRecord->total()}})
 
             </h1>
         </div>
         <!-- <div class="col-sm-6" style="text-align: right;">
-            <a href="{{ url('admin/admin/add') }}" class="btn btn-primary">Add new User</a>
+            <a href="{{ url('admin/schedule/add') }}" class="btn btn-primary">Add new Schedule</a>
         </div> -->
     </section>
 
@@ -32,20 +32,25 @@
                         <div class="box-body">
 
                             <div class="box-header">
-                                <h3 class="box-title">Search User</h3>
+                                <h3 class="box-title">Search Schedule</h3>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-3">
-                                    <label>Full Name </label>
-                                    <input type="text" class="form-control" name="name" value="{{Request::get('name')}}" placeholder="Enter Full Name">
+                                    <label>Schedule Titel </label>
+                                    <input type="text" class="form-control" name="name" value="{{Request::get('name')}}" placeholder="Enter Schedule Title">
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label>Email </label>
-                                    <input type="text" class="form-control" name="email" value="{{Request::get('email')}}" placeholder="Enter email">
+                                    <label>Start Date </label>
+                                    <input type="date" class="form-control" name="startDate" value="{{Request::get('startDate')}}" placeholder="Enter startDate">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label>End Date </label>
+                                    <input type="date" class="form-control" name="endDate" value="{{Request::get('endDate')}}" placeholder="Enter startDate">
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label>Group Name</label>
-                                    <input type="text" class="form-control" name="group_name" value="{{Request::get('group_name')}}" placeholder="Group Name" >
+                                    <label>Group</label>
+                                    <input type="text" class="form-control" name="group" value="{{Request::get('group')}}" placeholder="Group" >
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Created Date </label>
@@ -58,8 +63,8 @@
                                 </div> -->
                                 <div class="form-group col-md-3">
                                     <button class="btn btn-primary" type="submit" style="margin-top: 25px;">Search</button>
-                                    <a href="{{ url('admin/admin/list')}}" class="btn btn-success" type="submit" style="margin-top: 25px;">Reset</a>
-                                    <a href="{{ url('admin/admin/add') }}" class="btn btn-primary" style="margin-top: 25px;">Add new User</a>
+                                    <a href="{{ url('admin/schedule/list')}}" class="btn btn-success" type="submit" style="margin-top: 25px;">Reset</a>
+                                    <a href="{{ url('admin/schedule/add') }}" class="btn btn-primary" style="margin-top: 25px;">Add new User</a>
                                 </div>
 
                             </div>
@@ -76,29 +81,27 @@
     <section class="content">
         <div class="row">
 
-
             <!-- /.col -->
             <div class="col-md-12">
 
                 <div class="box">
                     @include('_message')
                     <div class="box-header">
-                        <h3 class="box-title">User List</h3>
+                        <h3 class="box-title"> Schedule List</h3>
                     </div>
-
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
                         <!-- <div class="form-group">
-                            <input type="text" id="searchInput" class="form-control" onkeyup="searchTable()" placeholder="Search for user..">
+                            <input type="text" id="searchInput" class="form-control" onkeyup="searchTable()" placeholder="Search for room..">
                         </div> -->
                         <div class="table-responsive">
-                            <table class="table table-striped responsive table-bordered" id="adminTable">
+                            <table class="table table-striped responsive table-bordered" id="scheduleTable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>User Type</th>
+                                        <th>Title</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
                                         <th>Group</th>
                                         <th>Created Date</th>
                                         <th>Actions</th>
@@ -108,22 +111,15 @@
                                     @foreach($getRecord as $value)
                                     <tr>
                                         <td>{{$value->id}}</td>
-                                        <td>{{$value->name}}</td>
-                                        <td>{{$value->email}}</td>
-                                        <td>
-                                            @if($value->usertype == 1)
-                                            ADMIN
-                                            @elseif($value->usertype == 2)
-                                            TEACHER
-                                            @elseif($value->usertype == 3)
-                                            STUDENT
-                                            @endif
-                                        </td>
-                                        <td>{{$value->group_name}}</td>
+                                        <td>{{$value->title}}</td>
+                                        <td>{{ date('d-m-Y H:i A', strtotime($value->startDate))}}</td>
+                                        <td>{{ date('d-m-Y H:i A', strtotime($value->endDate))}}</td>
+                                        <td>{{$value->group_title}}</td>
                                         <td>{{ date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
                                         <td>
-                                            <a href="{{ url('admin/admin/edit/'.$value->id) }}" class="btn btn-primary">Edit</a>
-                                            <a href="{{ url('admin/admin/delete/'.$value->id) }}" class="btn btn-danger">Delete</a>
+                                            <a href="{{ url('admin/schedule/edit/'.$value->id) }}" class="btn btn-primary">Edit</a>
+                                            <a href="{{ url('admin/schedule/delete/'.$value->id) }}" class="btn btn-danger">Delete</a>
+                                            <!-- <a href="{{ url('admin/timeTable/list/'.$value->id) }}" class="btn btn-success">Add Time Table</a> -->
                                         </td>
                                     </tr>
                                     @endforeach
@@ -140,7 +136,6 @@
                                 <li class="page-item"><a class="page-link" href="#" onclick="nextPage()">Next</a></li>
                             </ul>
                         </nav> -->
-
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -156,16 +151,17 @@
 
 @endsection
 
-@section('script')
 
+@section('script')
 <script>
     function searchTable() {
         // Declare variables
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("searchInput");
         filter = input.value.toUpperCase();
-        table = document.getElementById("adminTable");
-        tr = table.getElementsByTagName("tr");
+        table = document.getElementById("scheduleTable");
+        tr
+= table.getElementsByTagName("tr");
 
         // Loop through all table rows, and hide those who don't match the search query
         for (i = 1; i < tr.length; i++) { // Start from 1 to skip the table header row
@@ -182,7 +178,6 @@
             }
         }
     }
-
 
     const rowsPerPage = 10;
     let currentPage = 1;
@@ -212,7 +207,8 @@
         }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    documen
+    t.addEventListener("DOMContentLoaded", () => {
         displayRows();
     });
 </script>

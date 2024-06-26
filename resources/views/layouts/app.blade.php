@@ -28,6 +28,10 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ url('/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
+    <!-- Include Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -97,6 +101,11 @@
     <script src="{{ url('/public/dist/js/pages/dashboard.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ url('/public/dist/js/demo.js')}}"></script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Lfnp7JATV4zl1jc+f8Fa0e0qcPaC6uMSkoz1J3Tk4gA5srdvJJyAuhG1aZbm0Ym9" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
     @yield('script')
 </body>
 

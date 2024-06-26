@@ -8,7 +8,7 @@
     <section class="content-header">
 
         <h1>
-            Add New Admin
+            Edit Admin
         </h1>
 
     </section>
@@ -26,54 +26,70 @@
                         {{ csrf_field() }}
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Full Name *</label>
-                                <input type="text" class="form-control" name="name" required placeholder="Enter Full Name">
+                                <label>Name</label>
+                                <input type="text" class="form-control" name="name" value="{{ $getRecord->name}}" required placeholder="Enter name">
                             </div>
                             <div class="form-group">
-                                <label>Email *</label>
-                                <input type="email" class="form-control" name="email" required placeholder="Enter email">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="email" value="{{ $getRecord->email}}" required placeholder="Enter email">
                             </div>
                             <div class="form-group">
-                                <label>Password *</label>
-                                <input type="password" class="form-control" name="password" required placeholder="Password">
+                                <label>Password</label>
+                                <input type="text" class="form-control" name="password" placeholder="Password">
+                                <p>Do you want to change password? Enter new password </p>
                             </div>
 
                             <div class="form-group">
-                                <label>User Type *</label>
+                                <label>User Type</label>
                                 <select class="form-control" name="usertype" required>
-                                    <option selected>Choose...</option>
+                                    <option value="{{ $getRecord->usertype}}" selected>
+                                        @if($getRecord->usertype == 1)
+                                        ADMIN
+                                        @elseif($getRecord->usertype == 2)
+                                        TEACHER
+                                        @elseif($getRecord->usertype == 3)
+                                        STUDENT
+                                        @endif
+                                    </option>
                                     <option value="1">Admin</option>
                                     <option value="2">Teacher</option>
                                     <option value="3">Student</option>
                                 </select>
                             </div>
+                            <!-- <div class="form-group">
+                                <label>Group</label>
+                                <input type="text" class="form-control" name="group" value="{{ $getRecord->group_name}}" placeholder="">
+
+                            </div> -->
+
 
                             <div class="form-group">
                                 <label>Group *</label>
-                                <select class="form-control" name="group_name" required>
-                                    <option value="" disabled selected>Choose...</option>
+                                <select class="form-control" name="group_name" >
+                                    <option value="{{ $getRecord->group_name}}" selected>{{ $getRecord->group_name}}</option>
                                     @foreach ($getGroupAll as $group)
                                     <option value="{{ $group->title }}">
                                         {{ $group->title }}
                                     </option>
                                     @endforeach
                                 </select>
-                                <p>If user is student select his/ her group Or Don't select any group</p>
                             </div>
+
 
 
                         </div>
 
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+
                             <a href="{{ url('admin/admin/list')}}" class="btn btn-danger">Back</a>
                         </div>
                     </form>
                 </div>
 
     </section>
-
+    <!-- /.content -->
 </div>
 
 @endsection
